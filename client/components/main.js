@@ -33,6 +33,11 @@ const Main = () => {
   const handleClick = () => {
     history.push(`/${value.trim()}`)
   }
+  const pushEnter = (e) => {
+    if (e.code === 'Enter' || e.which === 13) {
+      history.push(`/${value.trim()}`)
+    }
+  }
   return (
     <div>
       <Head title="Hello" />
@@ -42,16 +47,14 @@ const Main = () => {
           <input
             id="input-field"
             type="text"
-            className="text-black"
+            className="rounded p-2 text-black"
+            placeholder="input username"
             onChange={onChange}
+            onKeyPress={(e) => pushEnter(e)}
             value={value}
           />
-          <button
-            id="search-button"
-            type="button"
-            className="font-bold"
-            onClick={handleClick}>
-              Search
+          <button id="search-button" type="button" className="font-bold" onClick={handleClick}>
+            Search
           </button>
         </div>
       </div>

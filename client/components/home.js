@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
+import{ Switch, Route } from 'react-router-dom'
 import Head from './head'
-// import wave from '../assets/images/wave.jpg'
+import Main from './main'
+import RepoList from './repoList'
+import RepoReadMe from './repoReadMe'
+
 
 const Home = () => {
-  const [counter, setCounterNew] = useState(0)
-
   return (
     <div>
       <Head title="Hello" />
-      <img alt="wave" src="images/wave.jpg" />
-      <button type="button" onClick={() => setCounterNew(counter + 1)}>
-        updateCounter
-      </button>
-      <div> Hello World Dashboard {counter} </div>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route exact path="/:userName" component={RepoList} />
+        <Route exact path="/:userName/:repositoryName" component={RepoReadMe} />
+      </Switch>
     </div>
   )
 }
 
 Home.propTypes = {}
 
-export default Home
+export default React.memo(Home)

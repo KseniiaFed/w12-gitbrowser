@@ -5,11 +5,13 @@ import bodyParser from 'body-parser'
 import sockjs from 'sockjs'
 import { renderToStaticNodeStream } from 'react-dom/server'
 import React from 'react'
+import { nanoid } from 'nanoid'
 
 import cookieParser from 'cookie-parser'
 import config from './config'
 import Html from '../client/html'
 
+const { readFile, writeFile } = require('fs').promises
 require('colors')
 
 let Root
@@ -34,6 +36,28 @@ const middleware = [
 ]
 
 middleware.forEach((it) => server.use(it))
+
+server.get('/api/v1/tasks/:category', async (req, res) => {
+  const { category } = req.params
+  const result = await readFile(`${__dirname}/tasks/${category}.json`, { encoding: "utf8" })
+    .then((text) => {
+      return JSON.parse(text)
+    })
+    .catch(() => {
+      const file = {
+        taskId: nanoid(),
+        title: req.body.title,
+        status: 'new',
+        _isDeleted: false,
+        _createdAt: +new Date(),
+        _deletedAt: null
+      }
+      writeFile(`${__dirname}/tasks/${category}.json`, JSON.stringify(file), { encoding: "utf8" })
+      return file
+    })
+  res.json(result)
+})
+
 
 server.use('/api/', (req, res) => {
   res.status(404)

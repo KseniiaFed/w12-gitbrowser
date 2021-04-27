@@ -2,34 +2,12 @@ import React, { useState } from 'react'
 import Head from './head'
 import { history } from '../redux'
 
-// const InputUserName = (props) => {
-//   const [value, setValue] = useState('')
-//   const onChange = (e) => {
-//     const newValue = e.target.value
-//     setValue(newValue)
-//     props.mainCallback(newValue)
-//   }
-//   return (
-//     <div>
-//       <input
-//         type="text"
-//         className="text-black"
-//         onChange={onChange}
-//         value={value}
-//       />
-//     </div>
-//   )
-// }
-
 const Main = () => {
   const [value, setValue] = useState('')
   const onChange = (e) => {
-    // const newValue = e.target.value
     setValue(e.target.value)
   }
-  // const myCallback = (data) => {
-  //   setValue(data)
-  // }
+
   const handleClick = () => {
     history.push(`/${value.trim()}`)
   }

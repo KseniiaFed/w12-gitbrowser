@@ -8,10 +8,10 @@ const RepoList = () => {
   const [state, setState] = useState([])
   const { userName } = useParams()
   const url = `https://api.github.com/users/${userName}/repos`
-  useEffect(() => {
-    axios(url)
+  useEffect(async () => {
+    const result = await axios(url)
       .then(({ data }) => data)
-      .then((repos) => {setState(repos)})
+    setState(result)
     return () => {}
   }, [userName])
 

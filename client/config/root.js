@@ -9,6 +9,7 @@ import Main from '../components/main'
 import RepoList from '../components/repoList'
 import RepoReadMe from '../components/repoReadMe'
 import DummyView from '../components/dummy-view'
+import Task from '../components/task'
 import NotFound from '../components/404'
 
 import Startup from './startup'
@@ -51,6 +52,7 @@ const RootComponent = (props) => {
         <Startup>
           <Switch>
             <Route exact path="/" component={() => <Main />} />
+            <Route exact path="/tasks/:category" component={() => <Task />} />
             <Route exact path="/:userName" component={() => <RepoList />} />
             <Route exact path="/:userName/:repositoryName" component={() => <RepoReadMe />} />
             <PrivateRoute exact path="/hidden-route" component={DummyView} />

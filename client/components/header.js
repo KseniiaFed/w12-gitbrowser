@@ -17,7 +17,7 @@ const Header = () => {
           />
         </svg>
       </div>
-      <div className="flex justify-center md:w-11/12 text-white font-bold text-3xl antialiased">
+      <div className="flex justify-center md:w-11/12 text-white font-bold text-xl sm:text-3xl antialiased">
         <span>Therapie Availability Search</span>
       </div>
     </div>

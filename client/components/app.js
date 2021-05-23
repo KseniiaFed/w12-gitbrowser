@@ -79,7 +79,7 @@ const App = () => {
   console.log('datesInterval:', datesInterval, 'timeslots from server', timeSlots)
 
   return (
-    <div className="bg-gray-100 h-full pb-4">
+    <div className="bg-gray-100 h-full">
       <Header />
       <div className="md:m-24 rounded-lg h-full flex flex-col bg-white xl:flex-row shadow-lg">
         <div className="flex flex-col md:rounded-md bg-purple-100 md:bg-white space-y-10 md:space-y-20 px-8 pb-20 md:px-24 md:py-20 xl:w-1/2">

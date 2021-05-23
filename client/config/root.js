@@ -2,14 +2,9 @@ import React from 'react'
 import { Provider, useSelector } from 'react-redux'
 import { ConnectedRouter } from 'connected-react-router'
 import { Switch, Route, Redirect, StaticRouter } from 'react-router-dom'
-
 import store, { history } from '../redux'
 
-import Main from '../components/main'
-import RepoList from '../components/repoList'
-import RepoReadMe from '../components/repoReadMe'
-import DummyView from '../components/dummy-view'
-import Task from '../components/task'
+import App from '../components/app'
 import NotFound from '../components/404'
 
 import Startup from './startup'
@@ -51,12 +46,9 @@ const RootComponent = (props) => {
       <RouterSelector history={history} location={props.location} context={props.context}>
         <Startup>
           <Switch>
-            <Route exact path="/" component={() => <Main />} />
-            <Route exact path="/tasks/:category" component={() => <Task />} />
-            <Route exact path="/:userName" component={() => <RepoList />} />
-            <Route exact path="/:userName/:repositoryName" component={() => <RepoReadMe />} />
-            <PrivateRoute exact path="/hidden-route" component={DummyView} />
-            <OnlyAnonymousRoute exact path="/anonymous-route" component={DummyView} />
+            <Route exact path="/" component={() => <App />} />
+            <PrivateRoute exact path="/hidden-route" component={App} />
+            <OnlyAnonymousRoute exact path="/anonymous-route" component={App} />
             <Route component={NotFound} />
           </Switch>
         </Startup>

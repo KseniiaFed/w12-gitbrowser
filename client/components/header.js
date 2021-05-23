@@ -1,30 +1,27 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-const Header = (props) => {
+const Header = () => {
   return (
-    <div>
-      <div className="flex w-screen justify-center items-center bg-indigo-800 shadow-lg text-white font-bold">
-        <div
-          id="go-back"
-          className="m-4 px-4 py-2 border hover:bg-white hover:text-indigo-800 rounded-lg"
+    <div className="flex flex-row items-center bg-purple-300 h-14 justify-center">
+      <div className="mx-3 text-black hidden md:block">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-9 w-9"
+          viewBox="0 0 20 20"
+          fill="currentColor"
         >
-          <Link to="/">BACK</Link>
-        </div>
-        <div id="repository-name" className="px-5 text-center w-3/4">
-          {props.user}
-        </div>
-        <div
-          id="go--repository-list"
-          className="m-4 px-4 hover:bg-white hover:text-indigo-800 py-2 border rounded-lg"
-        >
-          <Link to={`/${props.user}`}>To Repo List</Link>
-        </div>
+          <path
+            fillRule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </div>
+      <div className="flex justify-center md:w-11/12 text-white font-bold text-3xl antialiased">
+        <span>Therapie Availability Search</span>
       </div>
     </div>
   )
 }
 
-Header.propTypes = {}
-
-export default React.memo(Header)
+export default Header

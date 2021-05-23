@@ -41,22 +41,75 @@ server.get('/api/v1/tasks/:category', async (req, res) => {
   const { category } = req.params
   const result = await readFile(`${__dirname}/tasks/${category}.json`, { encoding: "utf8" })
     .then((text) => {
-      return JSON.parse(text)
+      const data = JSON.parse(text)
+      const filtered = data
     })
     .catch(() => {
-      const file = {
+      const file = [{
         taskId: nanoid(),
         title: req.body.title,
         status: 'new',
         _isDeleted: false,
         _createdAt: +new Date(),
         _deletedAt: null
-      }
+      }]
       writeFile(`${__dirname}/tasks/${category}.json`, JSON.stringify(file), { encoding: "utf8" })
       return file
     })
   res.json(result)
 })
+
+server.get('/api/v1/tasks/:category/:timespan', async (req, res) => {
+  const { category, timespan } = req.params
+  const result = await readFile(`${__dirname}/tasks/${category}.json`, { encoding: 'utf8' })
+  res.json(result)
+})
+
+
+
+server.post('/api/v1/tasks/:category', async (req, res) => {
+  const { category } = req.params
+  const newTask = req.body.title
+  const result = await readFile(`${__dirname}/tasks/${category}.json`, { encoding: 'utf8' })
+    .then((text) => {
+      const taskList = JSON.parse(text)
+      const taskListUpdated = [...taskList, {taskId: nanoid(), title: newTask, status:'new', _isDeleted: false, _createdAt: +new Date(), _deletedAt: null}]
+      writeFile(`${__dirname}/tasks/${category}.json`, JSON.stringify(taskListUpdated), { encoding: "utf8" })
+      return { status: 'added', result: taskListUpdated }
+    })
+    .catch( async () => {
+      const file = [
+        {
+          taskId: nanoid(),
+          title: newTask,
+          status: 'new',
+          _isDeleted: false,
+          _createdAt: +new Date(),
+          _deletedAt: null
+        }
+      ]
+      writeFile(`${__dirname}/tasks/${category}.json`, JSON.stringify(file), { encoding: 'utf8' })
+      return { status: 'newCategoryCreated', result: file}
+    })
+  res.json(result)
+})
+
+server.delete('/api/v1/tasks/:category/:id', async (req, res) => {
+  const { id } = req.params
+  const { category } = req.params
+  const result = await readFile(`${__dirname}/tasks/${category}.json`, { encoding: 'utf8' })
+    .then((text) => {
+      const taskList = JSON.parse(text)
+      const taskListUpdated = taskList.map(it => it.taskId === id ? { ...it, _isDeleted: true } : it )
+      writeFile(`${__dirname}/tasks/${category}.json`, JSON.stringify(taskListUpdated), { encoding: 'utf8' })
+      return { status: 'deleted', result: taskListUpdated}
+    })
+  res.json(result)
+})
+
+
+
+
 
 
 server.use('/api/', (req, res) => {

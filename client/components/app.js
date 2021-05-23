@@ -79,9 +79,9 @@ const App = () => {
   console.log('datesInterval:', datesInterval, 'timeslots from server', timeSlots)
 
   return (
-    <div className="bg-gray-100 h-full">
+    <div className="bg-white md:bg-gray-100 h-full md:pb-4">
       <Header />
-      <div className="md:m-24 rounded-lg h-full flex flex-col bg-white xl:flex-row shadow-lg">
+      <div className="md:m-24 rounded-lg h-full flex flex-col bg-white xl:flex-row md:shadow-lg">
         <div className="flex flex-col md:rounded-md bg-purple-100 md:bg-white space-y-10 md:space-y-20 px-8 pb-20 md:px-24 md:py-20 xl:w-1/2">
           <span className="font-bold self-center hidden md:block">Preferences</span>
           <Clinics clinics={clinics} select={clinicCallback} />
@@ -100,7 +100,7 @@ const App = () => {
             </button>
           </div>
         </div>
-        <div className="w-full h-auto bg-white rounded-md">
+        <div className="w-full h-auto bg-white md:rounded-md">
           <AvailableTimes times={timeSlots} clinicId={pickedClinic} serviceId={pickedService} />
         </div>
       </div>

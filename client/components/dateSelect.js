@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import DatePicker from 'react-datepicker'
 import { DateTime, Interval } from 'luxon'
 import { addDays } from 'date-fns'
-import 'react-datepicker/dist/react-datepicker.css'
+import './datepicker.css'
 
 const DateSelect = ({ selectInterval }) => {
   const [startDate, setStartDate] = useState(null)
